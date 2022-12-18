@@ -1,3 +1,3 @@
-42 Webserv
+# 42 ft_irc
 
-The project is in progress
+This proect is in progress...
