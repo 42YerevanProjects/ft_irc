@@ -14,23 +14,22 @@
 
 /* Constructor and Destructor */
 
-Server::Server(const std::string &port, const std::string &pass) : _port(port), _pass(pass)
+Server::Server(const std::string &port, const std::string &pass) : _host("127.0.0.1"), _port(port), _pass(pass)
 {
     _running = 1;
     _sock = create_socket();
-    
-    _host = "127.0.0.1";
 }
 
 Server::~Server() {}
 
+
 /* Create Socket */
 
-int     Server:create_socket()
+int     Server::create_socket()
 {
     // oppening a socket
 
-    int sock_fd = socket(AF_INET, SOCK_STREA, 0);
+    int sock_fd = socket(AF_INET, SOCK_STREAM, 0);
     if (sock_fd < 0)
         throw std::runtime_error("Error while opening a socket!");
 
@@ -53,7 +52,7 @@ int     Server:create_socket()
     
     serv_addr.sin_family = AF_INET;
     serv_addr.sin_addr.s_addr = INADDR_ANY;
-    serv_addr.sin_port = htons(std::stoi(_port));
+    serv_addr.sin_port = htons(atoi(_port.c_str()));
 
     // Bind socket to an IP address on selected port
     
