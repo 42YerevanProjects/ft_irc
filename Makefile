@@ -18,6 +18,7 @@ OBJS = $(SRCS:.cpp=.o)
 
 CC = c++
 FLAGS = -Wall -Wextra -Werror -std=c++98
+INCLUDES = -I ./includes
 
 RM = rm -rf
 
@@ -25,13 +26,13 @@ RM = rm -rf
 .cpp.o:
 	@echo "\n"
 	@echo "\033[0;32mCompiling IRC server..."
-	$(CC) $(CFLAGS) -c $< -o $(<:.cpp=.o)
+	$(CC) $(FLAGS) $(INCLUDES) -c $< -o $(<:.cpp=.o)
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
 	@echo "\n"
-	$(CC) $(FLAGS) $(OBJS) -o $(NAME)
+	$(CC) $(FLAGS) $(INCLUDES) $(OBJS) -o $(NAME)
 	@echo "\033[0;32m"
 
 clean:
