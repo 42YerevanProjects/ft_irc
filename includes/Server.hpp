@@ -22,8 +22,11 @@
 #include <unistd.h>
 #include <fcntl.h>
 
-#include <algorithm>
+#include <stdexcept>
+#include <string.h>
 #include <string>
+
+#include <algorithm>
 #include <vector>
 #include <map>
 
