@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Server.cpp	                                        :+:      :+:    :+:   */
+/*   Server.hpp	                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: shovsepy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -76,9 +76,13 @@ class Server
         void            on_client_disconnect(int fd);
         std::string     read_message(int fd);
 
-        /* Create Channel*/
+        /* Create Channel */
 
         Channel*        create_channel(const std::string &name, const std::string &pass, Client *client);
+
+        /* Create Socket */
+
+        int             create_socket();
 };
 
 #endif
