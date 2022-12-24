@@ -30,6 +30,9 @@
 #include "Channel.hpp"
 #include "Client.hpp"
 
+
+#define MAX_CONNECTIONS 999
+
 class Server
 {
     typedef std::vector<pollfd>::iterator       pfd_iterator;
