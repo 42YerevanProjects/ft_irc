@@ -49,6 +49,36 @@ class Server
         std::vector<Channel *>  _channels;
         std::map<int, Client *> _clients;
 
+        Server();
+        Server(const Server& src);
+
+    public:
+
+        /* Constructor and Destructor */
+
+        Server(const std::string &port, const std::string &pass);
+        ~Server();
+
+        /* Initialize and Listen */
+
+        void            start();
+
+        /* Getters */
+
+        std::string     get_password() const;
+        Client*         get_client(const std::string &nickname);
+        Channel*        get_channel(const std::string &name);
+
+        /* Handle Clients */
+
+        void            on_client_connect();
+        void            on_client_message(int fd);
+        void            on_client_disconnect(int fd);
+        std::string     read_message(int fd);
+
+        /* Create Channel*/
+
+        Channel*        create_channel(const std::string &name, const std::string &pass, Client *client);
 };
 
 #endif
