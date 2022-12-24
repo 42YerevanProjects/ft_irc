@@ -23,6 +23,7 @@
 #include <fcntl.h>
 
 #include <algorithm>
+#include <string>
 #include <vector>
 #include <map>
 
@@ -35,7 +36,19 @@ class Server
     typedef std::vector<Channel *>::iterator    channel_iterator;
     typedef std::map<int, Client *>::iterator   client_iterator;
 
-    // TODO: Continue filling...
+    private:
+        
+        int                     _running;
+        int                     _sock;
+
+        const std::string       _host;
+        const std::string       _port;
+        const std::string       _pass;
+
+        std::vector<pollfd>     _pfds;
+        std::vector<Channel *>  _channels;
+        std::map<int, Client *> _clients;
+
 };
 
 #endif
