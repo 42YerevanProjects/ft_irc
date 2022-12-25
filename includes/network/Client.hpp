@@ -27,7 +27,7 @@ enum ClientState
 {
     HANDSHAKE,
     LOGIN,
-    PLAY,
+    REGISTERED,
     DISCONNECTED
 };
 
