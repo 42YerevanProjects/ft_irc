@@ -38,3 +38,12 @@ std::string     Client::get_prefix() const
 
     return _nickname + username + hostname;
 }
+
+
+/* Setters */
+
+void            Client::set_nickname(const std::string &nickname) { _nickname = nickname; }
+void            Client::set_username(const std::string &username) { _username = username; }
+void            Client::set_realname(const std::string &realname) { _realname = realname; }
+void            Client::set_state(ClientState state) { _state = state; }
+
