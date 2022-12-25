@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef RESPONSE_HPP
-#define RESPONSE_HPP
+#ifndef IRC_RESPONSE_HPP
+#define IRC_RESPONSE_HPP
 
 /* Error Responses */
 
