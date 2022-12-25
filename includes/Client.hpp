@@ -58,6 +58,7 @@ class Client
         Client(int fd, int port, const std::string &hostname);
         ~Client();
 
+
         /* Getters */
 
         int             get_fd() const;
