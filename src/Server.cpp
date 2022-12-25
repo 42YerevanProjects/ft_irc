@@ -25,7 +25,7 @@ Server::~Server() {}
 
 /* Create Socket */
 
-int     Server::create_socket()
+int             Server::create_socket()
 {
     // oppening a socket
 
