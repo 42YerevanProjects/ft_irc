@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Server.hpp"
+#include "network/Server.hpp"
 
 /* Constructor and Destructor */
 
