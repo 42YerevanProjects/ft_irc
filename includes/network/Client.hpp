@@ -90,7 +90,15 @@ class Client
         bool            is_registered() const;
 
 
-        /* Client actions */
+        /* Send/Recieve Actions */
+
+        void            write(const std::string& message) const;
+        void            reply(const std::string& reply);
+
+        void            welcome();
+
+
+        /* Client Actions */
 
         void            join(Channel *channel);
         void            leave();
