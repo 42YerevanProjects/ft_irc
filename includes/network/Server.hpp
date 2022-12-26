@@ -82,11 +82,6 @@ class Server
         void            on_client_disconnect(int fd);
 
         std::string     read_message(int fd);
-        void            send_message(int fd, const std::string &message);
-        void            reply(Client &client, const std::string &reply);
-        
-        void            welcome(Client &client);
-
 
         /* Create Channel */
 
