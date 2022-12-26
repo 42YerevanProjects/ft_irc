@@ -13,7 +13,7 @@
 
 NAME = ircserv
 
-SRCS = $(wildcard src/*.cpp)
+SRCS = $(wildcard src/*.cpp src/network/*.cpp)
 OBJS = $(SRCS:.cpp=.o)
 
 CC = c++
@@ -24,25 +24,26 @@ RM = rm -rf
 
 
 .cpp.o:
-	@echo "\n"
-	@echo "\033[0;32mCompiling IRC server..."
 	$(CC) $(FLAGS) $(INCLUDES) -c $< -o $(<:.cpp=.o)
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
 	@echo "\n"
+	@echo "\033[0;32mCompiling IRC server..."
 	$(CC) $(FLAGS) $(INCLUDES) $(OBJS) -o $(NAME)
 	@echo "\033[0;32m"
 
 clean:
 	@echo "\033[0;31mRemoving binaries..."
 	@$(RM) $(OBJS)
+	@echo "\033[0;31mDone!"
 	@echo "\033[0m"
 
 fclean: clean
 	@echo "\033[0;31mRemoving executable..."
 	@$(RM) $(NAME)
+	@echo "\033[0;31mDone!"
 	@echo "\033[0m"
 
 re: fclean all
