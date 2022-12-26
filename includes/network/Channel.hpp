@@ -56,7 +56,7 @@ class Channel
         bool                        ext_msg() const;
 
         size_t                      get_size() const;
-        std::vector<std::string>    get_nicknames() const;
+        std::vector<std::string>    get_nicknames();
 
 
         /* Setters */
@@ -68,7 +68,7 @@ class Channel
 
         /* Channel Actions */
 
-        void                        send_message(Client* client);
+        void                        send_message(Client* client, const std::string& message);
 
         void                        broadcast(const std::string& message);
         void                        broadcast(const std::string& message, Client* exclude);
