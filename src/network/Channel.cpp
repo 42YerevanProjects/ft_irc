@@ -35,12 +35,12 @@ bool                        Channel::ext_msg() const { return _n; }
 
 size_t                      Channel::get_size()const { return _clients.size(); }
 
-std::vector<std::string>    Channel::get_nicknames() const
+std::vector<std::string>    Channel::get_nicknames()
 {
     std::vector<std::string> nicknames;
 
-    Channel::client_iterator it_b = _clients.begin();
-    Channel::client_iterator it_e = _clients.end();
+    client_iterator it_b = _clients.begin();
+    client_iterator it_e = _clients.end();
 
     while (it_b != it_e)
     {
@@ -61,3 +61,73 @@ std::vector<std::string>    Channel::get_nicknames() const
 void                        Channel::set_key(std::string key) { _k = key; }
 void                        Channel::set_limit(size_t limit) { _l = limit; }
 void                        Channel::set_ext_msg(bool flag) { _n = flag; }
+
+
+/* Channel Actions */
+
+void                        Channel::send_message(Client *client, const std::string& message)
+{
+    std::string buffer = message + "\r\n";
+    int fd = client->get_fd();
+    int n = buffer.length();
+
+    if (send(fd, buffer.c_str(), n, 0) < 0)
+        throw std::runtime_error("Error while sending a message to a client!");
+}
+
+void                        Channel::broadcast(const std::string& message)
+{
+    client_iterator it_b = _clients.begin();
+    client_iterator it_e = _clients.end();
+
+    while (it_b != it_e)
+    {
+        this->send_message(*it_b, message);
+        it_b++;
+    }
+}
+
+void                        Channel::broadcast(const std::string& message, Client* exclude)
+{
+    client_iterator it_b = _clients.begin();
+    client_iterator it_e = _clients.end();
+
+    while (it_b != it_e)
+    {
+        if (*it_b == exclude)
+        {
+            it_b++;
+            continue;
+        }
+
+        this->send_message(*it_b, message);
+        it_b++;
+    }
+}
+
+void                        Channel::add_client(Client* client)
+{
+    _clients.push_back(client);
+}
+
+void                        Channel::remove_client(Client* client)
+{
+    client_iterator it_b = _clients.begin();
+    client_iterator it_e = _clients.end();
+
+    while (it_b != it_e)
+    {
+        if (*it_b == client)
+            _clients.erase(it_b);
+        
+        it_b++;
+    }
+
+    if (client == _admin)
+    {
+        _admin = *(_clients.begin());
+
+        std::string message = client->get_nickname() + " is now the admin of the channel " + _name;
+        log(message);
+    }
+}
