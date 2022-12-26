@@ -17,6 +17,7 @@
 #include <string>
 #include <time.h>
 #include <cstdlib>
+#include <cstdio>
 
 /* Error Responses */
 
