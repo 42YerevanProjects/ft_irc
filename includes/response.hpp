@@ -13,6 +13,11 @@
 #ifndef IRC_RESPONSE_HPP
 #define IRC_RESPONSE_HPP
 
+#include <iostream>
+#include <string>
+#include <time.h>
+#include <cstdlib>
+
 /* Error Responses */
 
 #define ERR_NOTREGISTERED(source)                       "451 " + source + " :You have not registered"
@@ -54,5 +59,23 @@
 #define RPL_KICK(source, channel, target, reason)       ":" + source + " KICK " + channel + " " + target + " :" + reason
 #define RPL_MODE(source, channel, modes, args)          ":" + source + " MODE " + channel + " " + modes + " " + args
 
-#endif
 
+/* Log Response */
+
+static inline void log(const std::string& message) 
+{
+	time_t      rawtime;
+	struct tm   *timeinfo;
+	char        buffer[80];
+
+	time(&rawtime);
+	timeinfo = localtime(&rawtime);
+
+	strftime(buffer, sizeof(buffer), "%d-%m-%Y %H:%M:%S", timeinfo);
+	std::string str(buffer);
+
+	(void)message;
+	std::cout << "[" << str << "] " << message << std::endl;
+}
+
+#endif
