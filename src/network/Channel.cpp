@@ -123,6 +123,8 @@ void                        Channel::remove_client(Client* client)
         it_b++;
     }
 
+    client->set_channel(NULL);
+
     if (client == _admin)
     {
         _admin = *(_clients.begin());
