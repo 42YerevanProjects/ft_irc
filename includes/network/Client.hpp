@@ -80,7 +80,7 @@ class Client
         void            set_username(const std::string &username);
         void            set_realname(const std::string &realname);
         void            set_state(ClientState state);
-        void            set_chnnel(Channel *channel);
+        void            set_channel(Channel *channel);
 
 
         /* Check state */
