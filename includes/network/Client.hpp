@@ -19,8 +19,10 @@
 #include <string>
 #include <vector>
 
+class Client;
+
 #include "Channel.hpp"
-#include "response.hpp"
+#include "../response.hpp"
 
 
 enum ClientState
