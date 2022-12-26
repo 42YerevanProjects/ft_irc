@@ -47,6 +47,7 @@ class Client
         std::string     _hostname;
 
         ClientState     _state;
+        Channel*        _channel;
 
         Client();
         Client(const Client &src);
@@ -70,6 +71,8 @@ class Client
         std::string     get_hostname() const;
         std::string     get_prefix() const;
 
+        Channel*        get_channel() const;
+
     
         /* Setters */
 
@@ -77,6 +80,7 @@ class Client
         void            set_username(const std::string &username);
         void            set_realname(const std::string &realname);
         void            set_state(ClientState state);
+        void            set_chnnel(Channel *channel);
 
 
         /* Check state */
@@ -86,10 +90,8 @@ class Client
 
         /* Client actions */
 
-        void            welcome();
-
-        void            write(const std::string &message) const;
-        void            reply(const std::string &reply) const;
+        void            join(Channel *channel);
+        void            leave();
 };
 
 #endif
