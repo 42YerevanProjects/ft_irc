@@ -68,6 +68,8 @@ class Channel
 
         /* Channel Actions */
 
+        void                        send_message(Client* client);
+
         void                        broadcast(const std::string& message);
         void                        broadcast(const std::string& message, Client* exclude);
 
