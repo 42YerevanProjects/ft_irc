@@ -77,13 +77,13 @@ void            Client::welcome()
 {
     if (_state != LOGIN || _username.empty() || _realname.empty() || _nickname.empty())
 		return;
-	_state = REGISTERED;
-
-	this->reply(RPL_WELCOME(_nickname));
+    
+    _state = REGISTERED;
+    this->reply(RPL_WELCOME(_nickname));
 
     char message[100];
-	sprintf(message, "%s:%d is now known as %s.", _hostname.c_str(), _port, _nickname.c_str());
-	log(message);
+    sprintf(message, "%s:%d is now known as %s.", _hostname.c_str(), _port, _nickname.c_str());
+    log(message);
 }
 
 
@@ -126,7 +126,7 @@ void            Client::leave()
     const std::string name = _channel->get_name();
 
     _channel->broadcast(RPL_PART(get_prefix(), _channel->get_name()));
-	_channel->remove_client(this);
+    _channel->remove_client(this);
 
     std::string message = _nickname + " has left the channel " + name;
     log(message);
