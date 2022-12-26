@@ -58,3 +58,76 @@ void            Client::set_channel(Channel *channel) { _channel = channel; }
 
 bool            Client::is_registered() const { return _state == REGISTERED; }
 
+
+/* Send/Recieve Actions */
+
+void            Client::write(const std::string& message) const
+{
+    std::string buffer = message + "\r\n";
+    if (send(_fd, buffer.c_str(), buffer.length(), 0) < 0)
+        throw std::runtime_error("Error while sending a message to a client!");
+}
+
+void            Client::reply(const std::string& reply)
+{
+    this->write(":" + get_prefix() + " " + reply);
+}
+
+void            Client::welcome()
+{
+    if (_state != LOGIN || _username.empty() || _realname.empty() || _nickname.empty())
+		return;
+	_state = REGISTERED;
+
+	this->reply(RPL_WELCOME(_nickname));
+
+    char message[100];
+	sprintf(message, "%s:%d is now known as %s.", _hostname.c_str(), _port, _nickname.c_str());
+	log(message);
+}
+
+
+/* Client Actions */
+
+void            Client::join(Channel* channel)
+{
+    channel->add_client(this);
+    _channel = channel;
+
+    // Get users on the channel
+
+    std::string users = "";
+    std::vector<std::string> nicknames = channel->get_nicknames();
+    std::vector<std::string>::iterator it_b = nicknames.begin();
+    std::vector<std::string>::iterator it_e = nicknames.end();
+    while (it_b != it_e)
+    {
+        users.append(*it_b + " ");
+        it_b++;
+    }
+
+    // Send replies
+    
+    reply(RPL_NAMREPLY(_nickname, channel->get_name(), users));
+    reply(RPL_ENDOFNAMES(_nickname, channel->get_name()));
+    channel->broadcast(RPL_JOIN(get_prefix(), channel->get_name()));
+
+    // log
+
+    std::string message = _nickname + " has joined to the channel " + channel->get_name();
+    log(message);
+}
+
+void            Client::leave()
+{
+    if (!_channel)
+        return;
+
+    const std::string name = _channel->get_name();
+
+    _channel->broadcast(RPL_PART(get_prefix(), _channel->get_name()));
+	_channel->remove_client(this);
+
+    std::string message = _nickname + " has left the channel " + name;
+    log(message);
+}

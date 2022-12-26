@@ -65,16 +65,6 @@ void                        Channel::set_ext_msg(bool flag) { _n = flag; }
 
 /* Channel Actions */
 
-void                        Channel::send_message(Client *client, const std::string& message)
-{
-    std::string buffer = message + "\r\n";
-    int fd = client->get_fd();
-    int n = buffer.length();
-
-    if (send(fd, buffer.c_str(), n, 0) < 0)
-        throw std::runtime_error("Error while sending a message to a client!");
-}
-
 void                        Channel::broadcast(const std::string& message)
 {
     client_iterator it_b = _clients.begin();
@@ -82,7 +72,7 @@ void                        Channel::broadcast(const std::string& message)
 
     while (it_b != it_e)
     {
-        this->send_message(*it_b, message);
+        (*it_b)->write(message);
         it_b++;
     }
 }
@@ -100,7 +90,7 @@ void                        Channel::broadcast(const std::string& message, Clien
             continue;
         }
 
-        this->send_message(*it_b, message);
+        (*it_b)->write(message);
         it_b++;
     }
 }
