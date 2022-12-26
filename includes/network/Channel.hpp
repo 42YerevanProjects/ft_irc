@@ -57,6 +57,24 @@ class Channel
 
         size_t                      get_size() const;
         std::vector<std::string>    get_nicknames() const;
+
+
+        /* Setters */
+
+        void                        set_key(std::string key);
+        void                        set_limit(size_t limit);
+        void                        set_ext_msg(bool flag);
+
+
+        /* Channel Actions */
+
+        void                        broadcast(const std::string& message);
+        void                        broadcast(const std::string& message, Client* exclude);
+
+        void                        add_client(Client* client);
+        void                        remove_client(Client* client);
+
+        void                        kick(Client* client, Client* target, const std::string& reason);
 };
 
 #endif
