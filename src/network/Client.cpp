@@ -47,3 +47,8 @@ void            Client::set_username(const std::string &username) { _username = 
 void            Client::set_realname(const std::string &realname) { _realname = realname; }
 void            Client::set_state(ClientState state) { _state = state; }
 
+
+/* Check State */
+
+bool            Client::is_registered() const { return _state == ::REGISTERED; }
+
