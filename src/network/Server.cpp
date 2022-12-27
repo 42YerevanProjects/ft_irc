@@ -110,6 +110,41 @@ void            Server::on_client_connect()
     log(message);
 }
 
+void            Server::on_client_disconnect(int fd)
+{
+    try
+    {
+        // Finding the client and removing
+
+        Client* client = _clients.at(fd);
+
+        client->leave();
+        _clients->erase(fd);
+
+        // Removing the client fd from the poll
+
+        pfd_iterator it_b = _pfds.begin();
+        pfd_iterator it_e = _pfds.end();
+
+        while (it_b != it_e)
+        {
+            if (it_b->fd == fd)
+            {
+                _pfds.erase(it_b);
+                close(fd);
+                break;
+            }
+        }
+
+        // Release memory
+
+        delete client;
+    }
+    catch (const std::exception &e)
+    {
+        std::cout << "Error while disconnecting! " << e.what() << std::endl;
+    }
+}
 
 /* Create Socket */
 
