@@ -46,7 +46,7 @@ Client*         Server::get_client(const std::string& nickname)
 
     while (it_b != it_e)
     {
-        if (!nickname.compare(it_b->second->get_nickname))
+        if (!nickname.compare(it_b->second->get_nickname()))
             return it_b->second;
 
         it_b++;
@@ -62,7 +62,7 @@ Channel*        Server::get_channel(const std::string& name)
 
     while (it_b != it_e)
     {
-        if (!name.compare((*it_b)->get_name))
+        if (!name.compare((*it_b)->get_name()))
             return (*it_b);
 
         it_b++;
@@ -82,7 +82,7 @@ void            Server::on_client_connect()
     sockaddr_in addr = {};
     socklen_t   size = sizeof(addr);
 
-    fd = accept(_sock, (sockaddr_in *) &addr, &size);
+    fd = accept(_sock, (sockaddr *) &addr, &size);
     if (fd < 0)
         throw std::runtime_error("Error while accepting a new client!");
 
@@ -100,7 +100,7 @@ void            Server::on_client_connect()
 
     // creating and saving a new client
 
-    Client* client = new Client(fd, hostname, ntohs(addr.sin_port));
+    Client* client = new Client(fd, ntohs(addr.sin_port), hostname);
     _clients.insert(std::make_pair(fd, client));
 
     // logging connect message
