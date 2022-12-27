@@ -14,7 +14,8 @@
 
 /* Constructor and Destructor */
 
-Server::Server(const std::string &port, const std::string &pass) : _host("127.0.0.1"), _port(port), _pass(pass)
+Server::Server(const std::string &port, const std::string &pass) 
+    : _host("127.0.0.1"), _port(port), _pass(pass)
 {
     _running = 1;
     _sock = create_socket();
@@ -23,11 +24,98 @@ Server::Server(const std::string &port, const std::string &pass) : _host("127.0.
 Server::~Server() {}
 
 
+/* Initialize and Listen */
+
+void            Server::start()
+{
+
+}
+
+
+/* Getters */
+
+std::string     Server::get_password() const 
+{
+    return _pass;
+}
+
+Client*         Server::get_client(const std::string& nickname)
+{
+    client_iterator it_b = _clients.begin();
+    client_iterator it_e = _clients.end();
+
+    while (it_b != it_e)
+    {
+        if (!nickname.compare(it_b->second->get_nickname))
+            return it_b->second;
+
+        it_b++;
+    }
+
+    return NULL;
+}
+
+Channel*        Server::get_channel(const std::string& name)
+{
+    channel_iterator it_b = _channels.begin();
+    channel_iterator it_e = _channels.begin();
+
+    while (it_b != it_e)
+    {
+        if (!name.compare((*it_b)->get_name))
+            return (*it_b);
+
+        it_b++;
+    }
+
+    return NULL;
+}
+
+
+/* Handle Clients*/
+
+void            Server::on_client_connect()
+{
+    // accept a connection
+
+    int         fd;
+    sockaddr_in addr = {};
+    socklen_t   size = sizeof(addr);
+
+    fd = accept(_sock, (sockaddr_in *) &addr, &size);
+    if (fd < 0)
+        throw std::runtime_error("Error while accepting a new client!");
+
+    // including the client fd in the poll
+
+    pollfd  pfd = {fd, POLLIN, 0};
+    _pfds.push_back(pfd);
+
+    // getting hostname from the client address
+
+    char hostname[NI_MAXHOST];
+    int res = getnameinfo((struct sockaddr *) &addr, sizeof(addr), hostname, NI_MAXHOST, NULL, 0, NI_NUMERICSERV);
+    if (res != 0)
+        throw std::runtime_error("Error while getting a hostname on a new client!");
+
+    // creating and saving a new client
+
+    Client* client = new Client(fd, hostname, ntohs(addr.sin_port));
+    _clients.insert(std::make_pair(fd, client));
+
+    // logging connect message
+
+    char message[1000];
+    sprintf(message, "%s:%d has connected.", client->get_hostname().c_str(), client->get_port());
+    log(message);
+}
+
+
 /* Create Socket */
 
 int             Server::create_socket()
 {
-    // oppening a socket
+    // opening a socket
 
     int sock_fd = socket(AF_INET, SOCK_STREAM, 0);
     if (sock_fd < 0)
@@ -54,12 +142,12 @@ int             Server::create_socket()
     serv_addr.sin_addr.s_addr = INADDR_ANY;
     serv_addr.sin_port = htons(atoi(_port.c_str()));
 
-    // Bind socket to an IP address on selected port
+    // bind socket to an IP address on selected port
     
     if (bind(sock_fd, (sockaddr *) &serv_addr, sizeof(serv_addr)) < 0)
         throw std::runtime_error("Error while binding a socket!");
 
-    // Listening for requests
+    // listening for requests
 
     if (listen(sock_fd, MAX_CONNECTIONS) < 0)
         throw std::runtime_error("Error while listening on a socket!");
