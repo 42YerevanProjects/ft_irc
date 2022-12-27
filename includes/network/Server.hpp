@@ -19,11 +19,12 @@
 #include <netdb.h>
 #include <poll.h>
 
+#include <string.h>
 #include <unistd.h>
 #include <fcntl.h>
 
 #include <stdexcept>
-#include <string.h>
+#include <cerrno>
 #include <string>
 
 #include <algorithm>
