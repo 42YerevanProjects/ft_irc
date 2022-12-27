@@ -78,8 +78,8 @@ class Server
         /* Handle Clients */
 
         void            on_client_connect();
-        void            on_client_message(int fd);
         void            on_client_disconnect(int fd);
+        void            on_client_message(int fd);
 
         std::string     read_message(int fd);
 
