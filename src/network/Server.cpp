@@ -114,14 +114,14 @@ void            Server::on_client_disconnect(int fd)
 {
     try
     {
-        // Finding the client and removing
+        // finding the client and removing
 
         Client* client = _clients.at(fd);
 
         client->leave();
         _clients->erase(fd);
 
-        // Removing the client fd from the poll
+        // removing the client fd from the poll
 
         pfd_iterator it_b = _pfds.begin();
         pfd_iterator it_e = _pfds.end();
@@ -136,7 +136,7 @@ void            Server::on_client_disconnect(int fd)
             }
         }
 
-        // Release memory
+        // release memory
 
         delete client;
     }
@@ -145,6 +145,7 @@ void            Server::on_client_disconnect(int fd)
         std::cout << "Error while disconnecting! " << e.what() << std::endl;
     }
 }
+
 
 /* Create Socket */
 
