@@ -119,7 +119,7 @@ void            Server::on_client_disconnect(int fd)
         Client* client = _clients.at(fd);
 
         client->leave();
-        _clients->erase(fd);
+        _clients.erase(fd);
 
         // removing the client fd from the poll
 
