@@ -153,11 +153,11 @@ std::string     Server::read_message(int fd)
     char buffer[100];
     bzero(buffer, 100);
 
-    while (!std::strstr(buffer, "\r\n"))
+    while (!strstr(buffer, "\r\n"))
     {
         bzero(buffer, 100);
 
-        if ((recv(fd, buffer, 100, 0) < 0) and (errno != EWOULDBLOCK))
+        if (recv(fd, buffer, 100, 0) < 0) 
             throw std::runtime_error("Error while reading buffer from a client!");
 
         message.append(buffer);
