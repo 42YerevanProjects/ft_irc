@@ -72,7 +72,7 @@ Channel*        Server::get_channel(const std::string& name)
 }
 
 
-/* Handle Clients*/
+/* Handle Clients */
 
 void            Server::on_client_connect()
 {
@@ -144,6 +144,26 @@ void            Server::on_client_disconnect(int fd)
     {
         std::cout << "Error while disconnecting! " << e.what() << std::endl;
     }
+}
+
+std::string     Server::read_message(int fd)
+{
+    std::string message;
+    
+    char buffer[100];
+    bzero(buffer, 100);
+
+    while (!std::strstr(buffer, "\r\n"))
+    {
+        bzero(buffer, 100);
+
+        if ((recv(fd, buffer, 100, 0) < 0) and (errno != EWOULDBLOCK))
+            throw std::runtime_error("Error while reading buffer from a client!");
+
+        message.append(buffer);
+    }
+
+    return message;
 }
 
 
