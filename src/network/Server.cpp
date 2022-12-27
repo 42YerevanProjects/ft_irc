@@ -28,7 +28,45 @@ Server::~Server() {}
 
 void            Server::start()
 {
+    // add the server to the poll
 
+    pollfd srv = {_sock, POLLIN, 0};
+    _pfds.push_back(srv);
+
+    log("Server is listening...");
+
+    // running the main loop and waiting for connections
+
+    while (_running)
+    {
+        if (poll(_pfds.begin().base(), _pfds.size(), -1) < 0)
+            throw std::runtime_error("Error while polling from fd!");
+
+        // one or more descriptors are readable => process them
+
+        for (pfd_iterator it = _pfds.begin(); it != _pfds.end(); it++)
+        {
+            if (it->revents == 0)
+                continue;
+
+            if ((it->revents & POLLHUP) == POLLHUP)
+            {
+                this->on_client_disconnect(it->fd);
+                break;
+            }
+
+            if ((it->revents & POLLIN) == POLLIN)
+            {
+                if (it->fd == _sock)
+                {
+                    this->on_client_connect();
+                    break;
+                }
+
+                // this->on_client_read(it->fd);
+            }
+        }
+    }
 }
 
 
@@ -157,7 +195,7 @@ std::string     Server::read_message(int fd)
     {
         bzero(buffer, 100);
 
-        if (recv(fd, buffer, 100, 0) < 0) 
+        if ((recv(fd, buffer, 100, 0) < 0) and (errno != EWOULDBLOCK))
             throw std::runtime_error("Error while reading buffer from a client!");
 
         message.append(buffer);
