@@ -184,6 +184,11 @@ void            Server::on_client_disconnect(int fd)
     }
 }
 
+void            Server::on_client_message(int fd)
+{
+    //TODO: to be implemented
+}
+
 std::string     Server::read_message(int fd)
 {
     std::string message;
@@ -202,6 +207,17 @@ std::string     Server::read_message(int fd)
     }
 
     return message;
+}
+
+
+/* Create Channel */
+
+Channel*        Server::create_channel(const std::string& name, const std::string& key, Client* client)
+{
+    Channel *channel = new Channel(name, key, client);
+    _channels.push_back(channel);
+
+    return channel;
 }
 
 
