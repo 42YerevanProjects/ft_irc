@@ -15,7 +15,6 @@
 
 #include <numeric>
 #include <string>
-#include <regex>
 
 class Command;
 
@@ -58,7 +57,7 @@ class Notice : public Command
         ~Notice();
 
         void    execute(Client* client, std::vector<std::string> args);
-}
+};
 
 class PrivMsg : public Command
 {
@@ -68,7 +67,7 @@ class PrivMsg : public Command
         ~PrivMsg();
 
         void    execute(Client* client, std::vector<std::string> args);
-}
+};
 
 class Part : public Command
 {
@@ -78,7 +77,7 @@ class Part : public Command
         ~Part();
 
         void    execute(Client* client, std::vector<std::string> args);
-}
+};
 
 class Quit : public Command
 {
@@ -88,7 +87,7 @@ class Quit : public Command
         ~Quit();
 
         void    execute(Client* client, std::vector<std::string> args);
-}
+};
 
 class Join : public Command
 {
@@ -98,7 +97,7 @@ class Join : public Command
         ~Join();
 
         void    execute(Client* client, std::vector<std::string> args);
-}
+};
 
 class User : public Command
 {
@@ -108,7 +107,7 @@ class User : public Command
         ~User();
 
         void    execute(Client* client, std::vector<std::string> args);
-}
+};
 
 class Nick : public Command
 {
@@ -118,7 +117,7 @@ class Nick : public Command
         ~Nick();
 
         void    execute(Client* client, std::vector<std::string> args);
-}
+};
 
 class Pass : public Command
 {
@@ -128,7 +127,7 @@ class Pass : public Command
         ~Pass();
 
         void    execute(Client* client, std::vector<std::string> args);
-}
+};
 
 class Kick : public Command
 {
@@ -138,7 +137,7 @@ class Kick : public Command
         ~Kick();
 
         void    execute(Client* client, std::vector<std::string> args);
-}
+};
 
 class Ping : public Command
 {
@@ -148,7 +147,7 @@ class Ping : public Command
         ~Ping();
 
         void    execute(Client* client, std::vector<std::string> args);
-}
+};
 
 class Pong : public Command
 {
@@ -158,7 +157,7 @@ class Pong : public Command
         ~Pong();
 
         void    execute(Client* client, std::vector<std::string> args);
-}
+};
 
 class Mode : public Command
 {
@@ -168,6 +167,6 @@ class Mode : public Command
         ~Mode();
 
         void    execute(Client* client, std::vector<std::string> args);
-}
+};
 
 #endif
