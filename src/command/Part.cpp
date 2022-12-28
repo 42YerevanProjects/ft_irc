@@ -16,6 +16,8 @@ Part::Part(Server* srv) : Command(srv) {}
 
 Part::~Part() {}
 
+// syntax: PART <channels> [<message>]
+
 void    Part::execute(Client* client, std::vector<std::string> args)
 {
     if (args.empty()) 
