@@ -13,7 +13,7 @@
 
 NAME = ircserv
 
-SRCS = $(wildcard src/*.cpp src/network/*.cpp)
+SRCS = $(wildcard src/*.cpp src/network/*.cpp src/command/*.cpp)
 OBJS = $(SRCS:.cpp=.o)
 
 CC = c++
