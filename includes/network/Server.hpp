@@ -86,7 +86,7 @@ class Server
 
         /* Create Channel */
 
-        Channel*        create_channel(const std::string &name, const std::string &pass, Client *client);
+        Channel*        create_channel(const std::string &name, const std::string &key, Client *client);
 
         /* Create Socket */
 
