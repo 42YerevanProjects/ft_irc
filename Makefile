@@ -30,7 +30,7 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	@echo "\n"
-	@echo "\033[0;32mCompiling IRC server..."
+	@echo "\033[0;32mCompiling IRC server...\n"
 	$(CC) $(FLAGS) $(INCLUDES) $(OBJS) -o $(NAME)
 	@echo "\033[0;32m"
 
