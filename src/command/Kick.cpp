@@ -50,7 +50,7 @@ void    Kick::execute(Client* client, std::vector<std::String> args)
         return;
     }
 
-    if (channel->getAdmin() != client)
+    if (channel->get_admin() != client)
     {
         client->reply(ERR_CHANOPRIVSNEEDED(client->get_nickname(), name));
         return;
@@ -70,6 +70,5 @@ void    Kick::execute(Client* client, std::vector<std::String> args)
     }
 
     // if everything is fine
-    
     channel->kick(client, dest, reason);
 }
