@@ -18,7 +18,7 @@ Kick::~Kick() {}
 
 // syntax: KICK <channel> <client> :[<message>]
 
-void    Kick::execute(Client* client, std::vector<std::String> args)
+void    Kick::execute(Client* client, std::vector<std::string> args)
 {
     if (args.size() < 2)
     {
@@ -39,14 +39,17 @@ void    Kick::execute(Client* client, std::vector<std::String> args)
         std::vector<std::string>::iterator it = args.begin();
         std::vector<std::string>::iterator end = args.end();
 
-        while (it !+ end)
+        while (it != end)
+        {
 			reason.append(*it + " ");
-	}
+            it++;
+        }
+    }
 
     Channel *channel = client->get_channel();
     if (!channel || channel->get_name() != name)
     {
-        client->reply(ERR_NOTONCHANNEL(client->get_Nickname(), name));
+        client->reply(ERR_NOTONCHANNEL(client->get_nickname(), name));
         return;
     }
 
