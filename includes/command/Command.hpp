@@ -46,4 +46,128 @@ class Command
 };
 
 
+//=======================
+//  THE COMMAND CLASSES
+//=======================
+
+class Notice : public Command
+{
+    public:
+
+        Notice(Server* srv);
+        ~Notice();
+
+        void    execute(Client* client, std::vector<std::string> args);
+}
+
+class PrivMsg : public Command
+{
+    public:
+
+        PrivMsg(Server* srv);
+        ~PrivMsg();
+
+        void    execute(Client* client, std::vector<std::string> args);
+}
+
+class Part : public Command
+{
+    public:
+
+        Part(Server* srv);
+        ~Part();
+
+        void    execute(Client* client, std::vector<std::string> args);
+}
+
+class Quit : public Command
+{
+    public:
+
+        Quit(Server* srv);
+        ~Quit();
+
+        void    execute(Client* client, std::vector<std::string> args);
+}
+
+class Join : public Command
+{
+    public:
+
+        Join(Server* srv);
+        ~Join();
+
+        void    execute(Client* client, std::vector<std::string> args);
+}
+
+class User : public Command
+{
+    public:
+
+        User(Server* srv);
+        ~User();
+
+        void    execute(Client* client, std::vector<std::string> args);
+}
+
+class Nick : public Command
+{
+    public:
+
+        Nick(Server* srv);
+        ~Nick();
+
+        void    execute(Client* client, std::vector<std::string> args);
+}
+
+class Pass : public Command
+{
+    public:
+
+        Pass(Server* srv);
+        ~Pass();
+
+        void    execute(Client* client, std::vector<std::string> args);
+}
+
+class Kick : public Command
+{
+    public:
+
+        Kick(Server* srv);
+        ~Kick();
+
+        void    execute(Client* client, std::vector<std::string> args);
+}
+
+class Ping : public Command
+{
+    public:
+
+        Ping(Server* srv);
+        ~Ping();
+
+        void    execute(Client* client, std::vector<std::string> args);
+}
+
+class Pong : public Command
+{
+    public:
+
+        Pong(Server* srv);
+        ~Pong();
+
+        void    execute(Client* client, std::vector<std::string> args);
+}
+
+class Mode : public Command
+{
+    public:
+
+        Mode(Server* srv);
+        ~Mode();
+
+        void    execute(Client* client, std::vector<std::string> args);
+}
+
 #endif
