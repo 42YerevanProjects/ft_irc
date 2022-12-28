@@ -27,9 +27,9 @@ void    Part::execute(Client* client, std::vector<std::string> args)
     }
 
     std::string name = args[0];
-    Channel     *channel = _srv.get_channel(name);
+    Channel     *channel = _srv->get_channel(name);
 
-    if (!channel || !client->get_channel() || client->get_channel()->get_name != name)
+    if (!channel || !client->get_channel() || client->get_channel()->get_name() != name)
     {
         client->reply(ERR_NOSUCHCHANNEL(client->get_nickname(), name));
         return;
