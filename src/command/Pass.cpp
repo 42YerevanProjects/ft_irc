@@ -18,7 +18,7 @@ Pass::~Pass() {}
 
 // syntax: PASS <password>
 
-void    Pass::execute(Client* client, std::vetor<std::string> args)
+void    Pass::execute(Client* client, std::vector<std::string> args)
 {
     if (args.empty())
     {
@@ -32,7 +32,7 @@ void    Pass::execute(Client* client, std::vetor<std::string> args)
         return;
     }
 
-    if (_srv->get_pass() != args[0].substr(args[0][0] == ':' ? 1 : 0))
+    if (_srv->get_password() != args[0].substr(args[0][0] == ':' ? 1 : 0))
     {
         client->reply(ERR_PASSWDMISMATCH(client->get_nickname()));
         return;
