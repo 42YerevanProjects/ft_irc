@@ -16,6 +16,8 @@ Notice::Notice(Server* srv) : Command(srv) {}
 
 Notice::~Notice() {}
 
+// syntax: NOTICE <msgtarget> <message>
+
 void    Notice::execute(Client* client, std::vector<std::string> args)
 {
     if (args.size() < 2 || args[0].empty() || args[1].empty())

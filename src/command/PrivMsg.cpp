@@ -16,6 +16,8 @@ PrivMsg::PrivMsg(Server* srv) : Command(srv) {}
 
 PrivMsg::~PrivMsg() {}
 
+// syntax: :PRIVMSG <msgtarget> :<message>
+
 void    PrivMsg::execute(Client* client, std::vector<std::string> args)
 {
     if (args.size() < 2 || args[0].empty() || args[1].empty())
