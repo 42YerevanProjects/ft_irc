@@ -6,7 +6,7 @@
 /*   By: shovsepy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/24 20:58:45 by shovsepy          #+#    #+#             */
-/*   Updated: 2022/12/24 21:12:09 by shovsepy         ###   ########.fr       */
+/*   Updated: 2022/12/29 19:17:27 by shovsepy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -196,7 +196,7 @@ std::string     Server::read_message(int fd)
     char buffer[100];
     bzero(buffer, 100);
 
-    while (!strstr(buffer, "\r\n"))
+    while (!strstr(buffer, "\n"))
     {
         bzero(buffer, 100);
 
