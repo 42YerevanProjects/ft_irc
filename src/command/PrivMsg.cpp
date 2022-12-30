@@ -16,7 +16,7 @@ PrivMsg::PrivMsg(Server* srv) : Command(srv) {}
 
 PrivMsg::~PrivMsg() {}
 
-// syntax: :PRIVMSG <msgtarget> :<message>
+// syntax: PRIVMSG <msgtarget> :<message>
 
 void    PrivMsg::execute(Client* client, std::vector<std::string> args)
 {
@@ -35,7 +35,10 @@ void    PrivMsg::execute(Client* client, std::vector<std::string> args)
     std::vector<std::string>::iterator end = args.end();
 
     while (it != end)
+    {
         message.append(*it + " ");
+        it++;
+    }
 
     if (message.at(0) == ':')
         message = message.substr(1);
@@ -63,8 +66,12 @@ void    PrivMsg::execute(Client* client, std::vector<std::string> args)
 
             // check if client is in the channel
             while (it != end)
+            {
                 if (*it == client->get_nickname())
                     break;
+
+                it++;
+            }
 
             // if not in channel
             if (it == end)
