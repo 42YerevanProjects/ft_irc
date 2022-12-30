@@ -31,8 +31,11 @@
 #include <vector>
 #include <map>
 
-#include "Channel.hpp"
+class Server;
+
 #include "Client.hpp"
+#include "Channel.hpp"
+#include "command/Parser.hpp"
 
 
 #define MAX_CONNECTIONS 999
@@ -55,6 +58,8 @@ class Server
         std::vector<pollfd>     _pfds;
         std::vector<Channel *>  _channels;
         std::map<int, Client *> _clients;
+
+        Parser*                 _parser;
 
         Server();
         Server(const Server& src);
