@@ -76,7 +76,8 @@ static inline void log(const std::string& message)
 	std::string str(buffer);
 
 	(void)message;
-	std::cout << "[" << str << "] " << message << std::endl;
+	std::cout << "\033[0;34m[" << str << "]\033[0m ";
+    std::cout << message << std::endl;
 }
 
 #endif
