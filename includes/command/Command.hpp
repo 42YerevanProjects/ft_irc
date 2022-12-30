@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   command.hpp                                        :+:      :+:    :+:   */
+/*   Command.hpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: shovsepy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -83,7 +83,7 @@ class Quit : public Command
 {
     public:
 
-        Quit(Server* srv);
+        Quit(Server* srv, bool auth);
         ~Quit();
 
         void    execute(Client* client, std::vector<std::string> args);
@@ -103,7 +103,7 @@ class User : public Command
 {
     public:
 
-        User(Server* srv);
+        User(Server* srvi, bool auth);
         ~User();
 
         void    execute(Client* client, std::vector<std::string> args);
@@ -113,7 +113,7 @@ class Nick : public Command
 {
     public:
 
-        Nick(Server* srv);
+        Nick(Server* srv, bool auth);
         ~Nick();
 
         void    execute(Client* client, std::vector<std::string> args);
@@ -123,7 +123,7 @@ class Pass : public Command
 {
     public:
 
-        Pass(Server* srv);
+        Pass(Server* srv, bool auth);
         ~Pass();
 
         void    execute(Client* client, std::vector<std::string> args);
