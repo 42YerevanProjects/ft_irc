@@ -12,7 +12,7 @@
 
 #include "command/Command.hpp"
 
-User::User(Server* srv) : Command(srv) {}
+User::User(Server* srv, bool auth) : Command(srv, auth) {}
 
 User::~User() {}
 

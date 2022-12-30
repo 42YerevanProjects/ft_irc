@@ -12,7 +12,7 @@
 
 #include "command/Command.hpp"
 
-Nick::Nick(Server* srv) : Command(srv) {}
+Nick::Nick(Server* srv, bool auth) : Command(srv, auth) {}
 
 Nick::~Nick() {}
 

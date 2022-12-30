@@ -12,7 +12,7 @@
 
 #include "command/Command.hpp"
 
-Quit::Quit(Server* srv) : Command(srv) {}
+Quit::Quit(Server* srv, bool auth) : Command(srv, auth) {}
 
 Quit::~Quit() {}
 

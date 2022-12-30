@@ -12,7 +12,7 @@
 
 #include "command/Command.hpp"
 
-Pass::Pass(Server* srv) : Command(srv) {}
+Pass::Pass(Server* srv, bool auth) : Command(srv, auth) {}
 
 Pass::~Pass() {}
 
