@@ -22,7 +22,7 @@
 class Client;
 
 #include "Channel.hpp"
-#include "../response.hpp"
+#include "response.hpp"
 
 
 enum ClientState
@@ -36,8 +36,6 @@ enum ClientState
 
 class Client 
 {
-    typedef std::vector<pollfd>::iterator   pfd_iterator;
-
     private:
         
         int             _fd;
