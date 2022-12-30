@@ -30,9 +30,9 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	@echo "\n"
-	@echo "\033[0;32mCompiling IRC server...\n"
-	$(CC) $(FLAGS) $(INCLUDES) $(OBJS) -o $(NAME)
-	@echo "\033[0;32m"
+	@echo "\033[0;32mCompiling IRC server..."
+	@$(CC) $(FLAGS) $(INCLUDES) $(OBJS) -o $(NAME)
+	@echo "\033[0;32mDone!"
 
 clean:
 	@echo "\033[0;31mRemoving binaries..."
