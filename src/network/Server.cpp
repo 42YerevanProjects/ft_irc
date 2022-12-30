@@ -19,9 +19,13 @@ Server::Server(const std::string &port, const std::string &pass)
 {
     _running = 1;
     _sock = create_socket();
+    _parser = new Parser(this);
 }
 
-Server::~Server() {}
+Server::~Server() 
+{
+    delete _parser;
+}
 
 
 /* Initialize and Listen */
@@ -63,7 +67,7 @@ void            Server::start()
                     break;
                 }
 
-                // this->on_client_read(it->fd);
+                this->on_client_message(it->fd);
             }
         }
     }
@@ -186,7 +190,17 @@ void            Server::on_client_disconnect(int fd)
 
 void            Server::on_client_message(int fd)
 {
-    //TODO: to be implemented
+    try
+    {
+        std::string message = this->read_message(fd);
+        Client*     client = _clients.at(fd);
+        
+        _parser->invoke(client, message);
+    }
+    catch (const std::exception& e) 
+    {
+        std::cout << "Error while handling the client message! " << e.what() << std::endl;
+    }
 }
 
 std::string     Server::read_message(int fd)
