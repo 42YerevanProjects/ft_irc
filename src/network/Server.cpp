@@ -25,6 +25,9 @@ Server::Server(const std::string &port, const std::string &pass)
 Server::~Server() 
 {
     delete _parser;
+
+    for (size_t i = 0; i < _channels.size(); i++)
+        delete _clients[i];
 }
 
 
@@ -161,6 +164,13 @@ void            Server::on_client_disconnect(int fd)
         Client* client = _clients.at(fd);
 
         client->leave();
+
+        // log about disconnecting 
+
+        char message[1000];
+		sprintf(message, "%s:%d has disconnected!", client->get_hostname().c_str(), client->get_port());
+		log(message);
+
         _clients.erase(fd);
 
         // removing the client fd from the poll
@@ -176,6 +186,8 @@ void            Server::on_client_disconnect(int fd)
                 close(fd);
                 break;
             }
+
+            it_b++;
         }
 
         // release memory
@@ -192,8 +204,8 @@ void            Server::on_client_message(int fd)
 {
     try
     {
-        std::string message = this->read_message(fd);
         Client*     client = _clients.at(fd);
+        std::string message = this->read_message(fd);
         
         _parser->invoke(client, message);
     }
