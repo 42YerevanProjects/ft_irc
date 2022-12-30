@@ -32,19 +32,17 @@ $(NAME): $(OBJS)
 	@echo "\n"
 	@echo "\033[0;32mCompiling IRC server..."
 	@$(CC) $(FLAGS) $(INCLUDES) $(OBJS) -o $(NAME)
-	@echo "\033[0;32mDone!"
+	@echo "Done!\033[0m"
 
 clean:
 	@echo "\033[0;31mRemoving binaries..."
 	@$(RM) $(OBJS)
-	@echo "\033[0;31mDone!"
-	@echo "\033[0m"
+	@echo "Done!\n\033[0m"
 
 fclean: clean
 	@echo "\033[0;31mRemoving executable..."
 	@$(RM) $(NAME)
-	@echo "\033[0;31mDone!"
-	@echo "\033[0m"
+	@echo "Done!\n\033[0m"
 
 re: fclean all
 
