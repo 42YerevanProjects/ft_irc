@@ -15,9 +15,10 @@
 
 #include <iostream>
 #include <string>
-#include <time.h>
+
 #include <cstdlib>
 #include <cstdio>
+#include <time.h>
 
 /* Error Responses */
 
