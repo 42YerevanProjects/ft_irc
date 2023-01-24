@@ -11,6 +11,8 @@ More detailed information is contained in then subject.txt
 >  **Warning**: Don't copy/paste code you don't understand: it's bad for you, and for the school.
 
 
+
+
 ## <img src="https://github.com/markveligod/ft_irc/blob/main/img/chat.gif" width="32" height="32" > Description
 
 IRC (Internet Relay Chat) - an application-level Protocol for exchanging messages in real-time. Designed primarily for group communication, it also allows you to 
