@@ -10,6 +10,11 @@ More detailed information is contained in then subject.txt
 
 ## <img src="https://github.com/markveligod/ft_irc/blob/main/img/chat.gif" width="32" height="32" > Description
 
+
+>  **Warning**: Don't copy/paste code you don't understand: it's bad for you, and for the school.
+
+## Description
+
 IRC (Internet Relay Chat) - an application-level Protocol for exchanging messages in real-time. Designed primarily for group communication, it also allows you to 
 communicate via private messages and exchange data, including files. IRC uses the TCP transport protocol and cryptographic TLS (optional). IRC began to gain 
 particular popularity after Operation "Desert Storm" (1991), when messages from all over the world were collected in one place and broadcast on-line to IRC. 
