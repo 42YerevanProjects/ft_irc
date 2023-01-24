@@ -24,7 +24,7 @@ server, except for other servers. There are two types of customers:
 
 - custom settings;
 - service stations.
--
+
 <img src="https://github.com/markveligod/ft_irc/blob/main/img/network.svg">
 
 ### Forwarding messages in the IRC network
