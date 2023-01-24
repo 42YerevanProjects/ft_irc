@@ -1,8 +1,10 @@
 # 42 ft_irc
 
 This test project is intended for a deeper study of the operation of sockets and their interactions on the example of an IRC chat/server. The test project is built via 
-Makefile and is run using two commands:
-``./ircserv [port] [pass]`` if you need to start a single network
+Makefile and is run using the following command:
+
+``./ircserv [port] [pass]`` 
+
 More detailed information is contained in then subject.txt 
 📌If you have any questions or find bugs, write to the issues section.
 
